@@ -1,0 +1,41 @@
+{
+  "name": "laic",
+  "version": "0.1.0",
+  "description": "A namespaced dependency injection library",
+  "keywords": [
+    "di",
+    "dependency injection",
+    "ioc",
+    "inversion of control"
+  ],
+  "url": "https://github.com/jsumners/laic",
+  "bugs": {
+    "url": "https://github.com/jsumners/laic/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/jsumners/laic.git"
+  },
+  "main": "laic.js",
+  "scripts": {
+    "test": "mocha",
+    "doc": "jsdoc -R Readme.md -d doc laic.js"
+  },
+  "author": {
+    "name": "James Sumners",
+    "email": "james.sumners@gmail.com",
+    "url": "http://jrfom.com/"
+  },
+  "license": "MIT",
+  "engines": {
+    "node": ">=4.0.0"
+  },
+  "devDependencies": {
+    "chai": "^3.3.0",
+    "jsdoc": "jsdoc3/jsdoc#bd1cb9d",
+    "mocha": "^2.3.3"
+  },
+  "dependencies": {
+    "canonical-path": "0.0.2"
+  }
+}

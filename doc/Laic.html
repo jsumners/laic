@@ -1,0 +1,1520 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Class: Laic</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Class: Laic</h1>
+
+    
+
+
+
+
+<section>
+
+<header>
+    
+        <h2>Laic</h2>
+        
+            <div class="class-description">Laic</div>
+        
+    
+</header>
+
+<article>
+    <div class="container-overview">
+    
+        
+
+    
+    <h2>Constructor</h2>
+    
+
+    <h4 class="name" id="Laic"><span class="type-signature"></span>new Laic<span class="signature">(namespace<span class="signature-attributes">opt</span>)</span><span class="type-signature"></span></h4>
+
+    
+
+
+
+<div class="description">
+    <p><code>Laic</code> provides a dependency container. It supports dependency
+namespaces. By default, all dependencies are added to a global namespace.
+However, it is easy to define a new namespace at instantiation time by
+supplying a name. It is suggested you do so as <code>Laic</code> is a
+singleton object. Thus, if multiple modules in a project depend upon
+<code>Laic</code> then all of those modules will share the same
+<code>Laic</code> instance.</p>
+
+<p>Note: if you use a Symbol for the namespace identifier then
+you will need to use <a href="Laic.html#getNamespace">Laic#getNamespace</a> to retrieve the namespace.</p>
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+        <th>Attributes</th>
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>namespace</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+|
+
+<span class="param-type">Symbol</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
+
+            
+
+            <td class="description last">A <a href="Namespace.html">Namespace</a> to create in addition to
+the global namespace. Can be a path as is supported by
+<a href="Laic.html#addNamespacePath">Laic#addNamespacePath</a>.</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="laic.js.html">laic.js</a>, <a href="laic.js.html#line42">line 42</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
+    </div>
+
+    
+
+    
+
+    
+
+     
+
+    
+
+    
+
+    
+        <h3 class="subsection-title">Methods</h3>
+
+        
+            
+
+    
+
+    <h4 class="name" id="addNamespace"><span class="type-signature"></span>addNamespace<span class="signature">(namespaceName, nsRoot)</span><span class="type-signature"> &rarr; {<a href="Namespace.html">Namespace</a>}</span></h4>
+
+    
+
+
+
+<div class="description">
+    <p>Adds a new <a href="Namespace.html">Namespace</a> to the <a href="Laic.html">Laic</a> instance. The namespace
+can be accessed as a property of the <code>Laic</code> instance.
+
+<p>Note: if you use a Symbol for the namespace identifier then
+you will need to use <a href="Laic.html#getNamespace">Laic#getNamespace</a> to retrieve the namespace.</p>
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>namespaceName</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+|
+
+<span class="param-type">Symbol</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">An identifier for the namespace to
+create.</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>nsRoot</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><a href="Namespace.html">Namespace</a></span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">The top level namespace for child namespaces. Used
+for internal tracking. If not defined, it is assumed the namespace itself
+is the root.</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="laic.js.html">laic.js</a>, <a href="laic.js.html#line83">line 83</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+<h5>Throws:</h5>
+
+        
+
+    <div class="param-desc">
+    
+        If no <code>namespaceName</code> is given.
+    
+    </div>
+
+
+    
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    The newly created namespace.
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type"><a href="Namespace.html">Namespace</a></span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+    <h5>Example</h5>
+    
+    <pre class="prettyprint"><code>const laic = new Laic();
+laic.addNamespace('foo');
+laic.foo; // The namespace that was just added</code></pre>
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id="addNamespacePath"><span class="type-signature"></span>addNamespacePath<span class="signature">(path)</span><span class="type-signature"> &rarr; {<a href="Namespace.html">Namespace</a>}</span></h4>
+
+    
+
+
+
+<div class="description">
+    <p>Adds a nested set of <a href="Namespace.html">Namespace</a>s based on a given
+<code>path</code>.</p>
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>path</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">A Unix style path without a leading /.</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="laic.js.html">laic.js</a>, <a href="laic.js.html#line130">line 130</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+<h5>Throws:</h5>
+
+        
+
+<dl>
+    <dt>
+        <div class="param-desc">
+        If the path is a symbol or not really a path.
+        </div>
+    </dt>
+    <dd></dd>
+    <dt>
+        <dl>
+            <dt>
+                Type
+            </dt>
+            <dd>
+                
+<span class="param-type">Error</span>
+
+
+            </dd>
+        </dl>
+    </dt>
+    <dd></dd>
+</dl>
+
+
+    
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    The first <a href="Namespace.html">Namespace</a> in the nested path.
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type"><a href="Namespace.html">Namespace</a></span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+    <h5>Example</h5>
+    
+    <pre class="prettyprint"><code>const laic = new Laic();
+const nsPath = laic.addNamespacePath('foo/bar');
+nsPath.bar.register('today', new Date());
+console.log(laic.foo.bar.get('today')); // today's date</code></pre>
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id="get"><span class="type-signature"></span>get<span class="signature">(dependencyName)</span><span class="type-signature"> &rarr; {*|undefined}</span></h4>
+
+    
+
+
+
+<div class="description">
+    <p>Retrieve a value from the namespace. By default, the value will be
+retrieved from the global namespace unless the instance is itself a
+namespace. You can retrieve a namespace other than the global one via
+<a href="Laic.html#getNamespace">Laic#getNamespace</a> or, if it has a String name, by
+referencing the name in a chain.</p>
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>dependencyName</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+|
+
+<span class="param-type">Symbol</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">The dependency name to retrieve.</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="laic.js.html">laic.js</a>, <a href="laic.js.html#line170">line 170</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    The dependency or <code>undefined</code> if it was
+not found.
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">*</span>
+|
+
+<span class="param-type">undefined</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+    <h5>Examples</h5>
+    
+    <pre class="prettyprint"><code>const laic = new Laic('foo');
+laic.foo.register('bar', 'foobar');
+console.log(laic.foo.get('bar')); // 'foobar'
+console.log(laic.getNamespace('foo').get('bar')); // 'foobar'</code></pre>
+
+        <p class="code-caption">Additionally, you can supply a path to a value name to retrieve it:</p>
+    
+    <pre class="prettyprint"><code>const laic = new Laic('foo/bar');
+laic.foo.bar.register('today', new Date());
+console.log(laic.get('foo/bar/today')); // today's date</code></pre>
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id="getNamespace"><span class="type-signature"></span>getNamespace<span class="signature">(name)</span><span class="type-signature"> &rarr; {<a href="Namespace.html">Namespace</a>}</span></h4>
+
+    
+
+
+
+<div class="description">
+    <p>Retrieve a namespace that is identified by the given name.</p>
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>name</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+|
+
+<span class="param-type">Symbol</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">The identifier for the namespace.</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="laic.js.html">laic.js</a>, <a href="laic.js.html#line205">line 205</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    The desired namespace or the current instance if
+one by the given <code>name</code> was not found.
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type"><a href="Namespace.html">Namespace</a></span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id="loadDir"><span class="type-signature"></span>loadDir<span class="signature">(dir)</span><span class="type-signature"> &rarr; {<a href="Laic.html">Laic</a>}</span></h4>
+
+    
+
+
+
+<div class="description">
+    <p>Given a path relative to the project's root directory, load any
+<code>.js</code> or <code>.json</code> files, except for <code>index</code>
+files, within that directory. The files will be loaded with
+<a href="Laic.html#loadFile">Laic#loadFile</a>. As such, the same rules that apply to
+<code>loadFile</code> apply to <code>loadDir</code>.</p>
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>dir</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">Relative path to a directory to load, e.g 'foo/bar'.</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="laic.js.html">laic.js</a>, <a href="laic.js.html#line236">line 236</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    The same namespace upon which <code>loadDir</code> was
+invoked.
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type"><a href="Laic.html">Laic</a></span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id="loadFile"><span class="type-signature"></span>loadFile<span class="signature">(file)</span><span class="type-signature"> &rarr; {<a href="Laic.html">Laic</a>}</span></h4>
+
+    
+
+
+
+<div class="description">
+    <p>Given a file name, possibly with a path, determine the absolute
+path to the file and <code>require</code> it. Once loaded, store the
+instance in the current namespace.</p>
+
+<p>The starting location for lookups is the root directory of the parent
+project. That is, if you installed Laic as a dependency for project
+'foobar', then Laic will look in 'foobar/' and its subdirectories (if
+given a subdirectory path).</p>
+
+<p>Paths should not start with a leading slash, and should end with the
+basename of the file to load.</p>
+
+<p>The given path will be used as the namespace for storage, or global
+if it is in the root directory, with the basename of the file used as the
+registration name.</p>
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>file</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">A filename in the project root or a path to a file
+in a subdirectory of the project root.</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="laic.js.html">laic.js</a>, <a href="laic.js.html#line286">line 286</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+<h5>Throws:</h5>
+
+        
+
+<dl>
+    <dt>
+        <div class="param-desc">
+        If a given path does not resolve to a valid directory.
+        </div>
+    </dt>
+    <dd></dd>
+    <dt>
+        <dl>
+            <dt>
+                Type
+            </dt>
+            <dd>
+                
+<span class="param-type">Error</span>
+
+
+            </dd>
+        </dl>
+    </dt>
+    <dd></dd>
+</dl>
+
+
+    
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    The namespace under which the loaded file was registered.
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type"><a href="Laic.html">Laic</a></span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+    <h5>Example</h5>
+    
+    <pre class="prettyprint"><code>const laic = new Laic();
+laic.loadFile('foo/bar'); // directory: 'foo', file: 'bar.js'
+laic.foo.get('bar'); // return the 'bar' instance</code></pre>
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id="register"><span class="type-signature"></span>register<span class="signature">(name, instance)</span><span class="type-signature"> &rarr; {<a href="Namespace.html">Namespace</a>}</span></h4>
+
+    
+
+
+
+<div class="description">
+    <p>Adds an object to the namespace under the given name. If the object
+has already been added, and has the '@singleton' annotation, then the
+instance will not be re-registered. Otherwise, the old instance will be
+overwritten by the new instance.</p>
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>name</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+|
+
+<span class="param-type">Symbol</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">The name for the instance within the namespace.</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>instance</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">*</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">Any initialized object.</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="laic.js.html">laic.js</a>, <a href="laic.js.html#line333">line 333</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    The namespace under which the object was registered.
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type"><a href="Namespace.html">Namespace</a></span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+        
+    
+
+    
+
+    
+</article>
+
+</section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="Laic.html">Laic</a></li><li><a href="Namespace.html">Namespace</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.4.0-dev</a> on Sun Oct 18 2015 14:03:30 GMT-0400 (EDT)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

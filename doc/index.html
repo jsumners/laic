@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Home</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Home</h1>
+
+    
+
+
+
+    
+
+
+    <h3> </h3>
+
+
+
+
+
+
+
+
+
+
+    
+
+
+
+
+    <section>
+        <article><h1>Laic</h1><p><em>Laic</em> is a Dependency Injector (DI) library. There are many such libraries
+available. Indeed, <em>Laic</em>'s feature set and methodolgy was informed by
+the <a href="https://www.npmjs.com/package/electrolyte">Electrolyte</a> library. <em>Laic</em> sets itself apart with
+the following features:</p>
+<ul>
+<li>Namespaces</li>
+<li>Nested namespaces</li>
+<li>Namespace chaining</li>
+<li>Namespace paths</li>
+</ul>
+<p>The name <em>Laic</em> does not have any special significance. It was picked from
+a fantasy name generator list.</p>
+<p><em>Laic</em> is written with ES2015 features. Your environment should support them
+if you intend to use <em>Laic</em> in your project.</p>
+<h3>Example</h3><pre class="prettyprint source lang-javascript"><code>const Laic = require('laic');
+const laic = new Laic();
+
+function Foo() {}
+const foo = new Foo();
+
+laic.register('foo', foo);
+
+const _foo = laic.get('foo');
+assert.strictEqual(foo, _foo);</code></pre><h2>Namespaces</h2><p>The defining feature of <em>Laic</em> is its support for isolating dependencies
+in their own namespace within a global container. As with
+<a href="https://www.npmjs.com/package/electrolyte">Electrolyte</a>, <em>Laic</em> is a singleton object. With <em>Electrolyte</em>,
+this means you can't use dependencies that may conflict. Which further means
+you can really only use it in a top level project and not within modules.
+<em>Laic</em> has a global namespace, but it also allows you to define your own
+namespace. This can be done in two ways:</p>
+<pre class="prettyprint source lang-javascript"><code>const Laic = require('laic');
+
+// Define a namespace with the constructor
+const laic = new Laic('foo');
+// Get a reference to the namespace
+const foo = laic.getNamespace('foo');
+
+// Define a namespace by method
+const bar = laic.addNamespace('bar');</code></pre><p>The namespaces <code>foo</code> and <code>bar</code> are now available for registering dependencies.
+Also note that a 'namespace' is itself an instance of <code>Laic</code> (techinically it's
+an instance of <code>Namespace</code>, but that is a subclass of <code>Laic</code>).</p>
+<h3>Nesting And Chaining</h3><p>We defined top level namespaces in the introduction. But we can also define
+new namespaces within a namespace. For example, let's say we have a namespace
+named 'parent' that should contain a namespace named 'child':</p>
+<pre class="prettyprint source lang-javascript"><code>const child = laic.addNamespace('parent').addNamespace('child');
+child.register('toy', new (function Toy(){}));
+child.get('toy'); // the child's toy</code></pre><p>But that's an onerous method. Just as we were able to chain the <code>addNamespace</code>
+method, we can chain access to namespaces:</p>
+<pre class="prettyprint source lang-javascript"><code>laic.parent.child.get('toy'); // the child's toy</code></pre><h3>Paths</h3><p>In <em>Nesting And Chaining</em> we defined a child namespace by chaining calls
+to <code>addNamespace</code>. We can simplify that with a path:</p>
+<pre class="prettyprint source lang-javascript"><code>const grandchild = laic.addNamespacePath('parent/child/grandchild');
+grandchild.register('toy', new (function Toy(){}));
+laic.parent.child.grandchild.get('toy'); // granchild.get('toy')</code></pre><p>In fact, we can even retrieve the <code>toy</code> by path:</p>
+<pre class="prettyprint source lang-javascript"><code>laic.get('parent/child/grandchild/toy');</code></pre><h2>Annotations</h2><p><em>Laic</em> supports a few annotations. These annotations are simply properties
+on an exported module. As an example, let's assume there is an annotation
+named '@foo' that has a boolean value:</p>
+<pre class="prettyprint source lang-javascript"><code>function Bar() {}
+
+module.exports = Bar;
+
+module.exports['@foo'] = true;</code></pre><h3>@literal</h3><p>The simplest annotation is the <code>@literal</code> annotation. If a dependency has this
+annotation then the only other annotation <em>Laic</em> will only honor is the
+<code>@singleton</code> annotation. This annotation accepts a boolean value:
+<code>true</code> or <code>false</code>.</p>
+<pre class="prettyprint source lang-javascript"><code>module.exports = {
+  foo: 'bar'
+};
+
+module.exports['@literal'] = true;</code></pre><h3>@singleton</h3><p>Indicates that a dependency should only be instantiated once. Subsequent
+attempts to register the same module will result in silent failure, i.e.
+it won't overwrite the previously registered instance. This annotation
+accepts a boolean value:</p>
+<pre class="prettyprint source lang-javascript"><code>module.exports = {
+  foo: 'bar'
+};
+
+module.exports['@literal'] = true;
+module.exports['@singleton'] = true;</code></pre><h3>@requires</h3><p>This annotation is an array of dependency names for the module being loaded.
+The names can be valid paths as can be supplied to <code>get()</code>.</p>
+<p>Modules that use this annoation must follow one of two forms: a builder or
+a constructor (which will be discussed elsewhere). A builder module exports a
+function as its sole export (other than annotations). This function accepts
+a list of dependencies in the order in which they are defined in the
+annotation. When the module is registered this method
+will be invoked with the dependencies from the annotation passed in as
+arguments (<code>this</code> will be bound to the module).</p>
+<pre class="prettyprint source lang-javascript"><code>let foo;
+let bar;
+
+function Baz() {}
+
+Baz.prototype.print = function print() {
+  return `${foo} -- ${bar}`;
+};
+
+module.exports = function ($foo, $bar) {
+  foo = $foo;
+  bar = $bar;
+
+  return Baz;
+};
+
+module.exports['@requires'] = [ 'lib/foo', 'lib/bar' ];</code></pre><h3>@constructor</h3><p>This is a boolean annotation that defines the module as exporting a constructor
+instead of a builder. This annotation supports the '@requires' annotation. Like
+with the builder module type, described in <em>@requires</em>, any required
+dependencies will be passed in to the constructor when it is invoked; this
+happens when the module is registered. <code>this</code> will be bound to the constructor.
+<em>Laic</em> stores the result of <code>new Constructor(dependencies)</code>.</p>
+<pre class="prettyprint source lang-javascript"><code>function Baz(foo, bar) {
+  this.foo = foo;
+  this.bar = bar;
+}
+
+Baz.prototype.print = function print() {
+  return `${this.foo} -- ${this.bar}`;
+};
+
+module.exports = Baz;
+
+module.exports['@constructor'] = true;
+module.exports['@requires'] = [ 'lib/foo', 'lib/bar' ];</code></pre><h2>Loaders</h2><p><em>Laic</em> provides some helper methods for registering dependencies. These
+methods can load individual files or a directory of files.</p>
+<h3>Load File</h3><p>This is equivalent to <code>require</code>ing a JavaScript file but has the added benefit
+of loading the file directly into a namespace.</p>
+<p>Let's assume you have a file 'foo.js' in the root of your project and a file
+'lib/bar.js':</p>
+<pre class="prettyprint source lang-javascript"><code>laic.loadFile('foo.js');
+// results in
+const foo = laic.get('foo');
+
+laic.loadFile('lib/bar.js');
+// results in
+const bar = laic.lib.get('bar');</code></pre><p>Remember, all namespaces support this method. To avoid potential collisions
+you should use it from a namespace you have defined instead of the global one
+as is shown here.</p>
+<h3>Load Directory</h3><p>This works the same way as <em>Load File</em> but operates on a whole directory. Note,
+it does not traverse subdirectories.</p>
+<p>Let's assume you have a 'lib' directory in the root of your project that
+contains the files 'foo.js', 'bar.js', and 'fooBar.js':</p>
+<pre class="prettyprint source lang-javascript"><code>laic.loadDir('lib/'); // note the trailing slash
+const foo = laic.lib.get('foo');
+const bar = laic.lib.get('bar');
+const fooBar = laic.lib.get('fooBar');</code></pre><p>Remember, all namespaces support this method. To avoid potential collisions
+you should use it from a namespace you have defined instead of the global one
+as is shown here.</p>
+<h2>License</h2><p><a href="http://jsumners.mit-license.org/">MIT License</a></p></article>
+    </section>
+
+
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="Laic.html">Laic</a></li><li><a href="Namespace.html">Namespace</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.4.0-dev</a> on Sun Oct 18 2015 14:03:30 GMT-0400 (EDT)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>
