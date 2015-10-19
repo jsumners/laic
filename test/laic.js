@@ -22,6 +22,13 @@ describe('Laic', function describeLaic() {
     expect(laic3.foo).to.not.exist;
   });
 
+  it('has a static getter', function staticGetter() {
+    const Laic = require(laicPath);
+    const laic = Laic.laic;
+    expect(laic).to.be.an.instanceOf(Laic);
+    delete require.cache[laicPath];
+  });
+
   it('has a global namespace', function hasGlobal() {
     const laic = new (require(laicPath))();
     laic.register('foo', 'bar');

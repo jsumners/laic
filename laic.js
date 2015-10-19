@@ -506,5 +506,16 @@ function nsPathExists(laic, path) {
   return result;
 }
 
+
+Object.defineProperty(Laic,  'laic', {
+  get: function _getLaic() {
+    if (_laic) {
+      return _laic;
+    }
+
+    return new Laic();
+  }
+});
+
 Laic.Namespace = Namespace;
 module.exports = Laic;

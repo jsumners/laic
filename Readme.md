@@ -22,8 +22,7 @@ available in the [doc](doc/) directory.
 ### Example
 
 ```javascript
-const Laic = require('laic');
-const laic = new Laic();
+const laic = require('laic').laic;
 
 function Foo() {}
 const foo = new Foo();
@@ -167,7 +166,7 @@ Baz.prototype.print = function print() {
 module.exports = function ($foo, $bar) {
   foo = $foo;
   bar = $bar;
-  
+
   return Baz;
 };
 
