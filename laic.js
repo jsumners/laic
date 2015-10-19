@@ -33,8 +33,8 @@ let _laic;
  * <p>Note: if you use a {@link Symbol} for the namespace identifier then
  * you will need to use {@link Laic#getNamespace} to retrieve the namespace.</p>
  *
- * @param {(string|Symbol)} [namespace] A {@link Namespace} to create in addition to
- * the global namespace. Can be a path as is supported by
+ * @param {(string|Symbol)} [namespace] A {@link Namespace} to create in
+ * addition to the global namespace. Can be a path as is supported by
  * {@link Laic#addNamespacePath}.
  * @constructor
  * @class Laic
@@ -157,7 +157,8 @@ Laic.prototype.addNamespacePath = function addNamespacePath(path) {
  * console.log(laic.foo.get('bar')); // 'foobar'
  * console.log(laic.getNamespace('foo').get('bar')); // 'foobar'
  *
- * @example <caption>Additionally, you can supply a path to a value name to retrieve it:</caption>
+ * @example <caption>Additionally, you can supply a path to a value name to
+ * retrieve it:</caption>
  *
  * const laic = new Laic('foo/bar');
  * laic.foo.bar.register('today', new Date());
@@ -244,7 +245,7 @@ Laic.prototype.loadDir = function loadDir(dir) {
       return result;
     });
     for (let f of filesToLoad) {
-      this.loadFile(path.join(dir, f));
+      this.loadFile(path.join(dir, f)); // jshint ignore: line
     }
   }
 
@@ -283,6 +284,7 @@ Laic.prototype.loadDir = function loadDir(dir) {
  * @returns {Laic} The namespace under which the loaded file was registered.
  * @throws {Error} If a given path does not resolve to a valid directory.
  */
+/* jshint maxstatements: false */
 Laic.prototype.loadFile = function loadFile(file) {
   const filename = path.basename(file, path.extname(file));
   const dir = path.dirname(file);
@@ -436,7 +438,7 @@ function instantiate(namespace, instance) {
         return instance.apply(this, args);
       }
       util.inherits(F, instance);
-      return new F(args)
+      return new F(args);
     }()
   );
 }

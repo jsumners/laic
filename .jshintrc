@@ -13,6 +13,7 @@
   "funcscope": true,
   "node": true,
   "esnext": true,
+  "mocha": true,
 
   "globals": {
     "exports": true
