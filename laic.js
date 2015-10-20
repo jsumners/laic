@@ -351,7 +351,7 @@ Laic.prototype.register = function register(name, instance) {
     });
   }
 
-  if (isSingleton(instance) && parent[_name] !== undefined) {
+  if (parent[_name] !== undefined && isSingleton(parent[_name])) {
     return parent;
   }
 

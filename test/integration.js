@@ -36,6 +36,15 @@ it('supports constructor annotations', function constructorAnnotations() {
   delete require.cache[laicPath];
 });
 
+it('supports singleton annotations', function singletonAnnotations() {
+  const laic = new (new require(laicPath))();
+  laic.register('s', require('./lib/singleton1.js'));
+  assert.equal(laic.get('s').foo, 'bar');
+  laic.register('s', require('./lib/singleton2.js'));
+  assert.equal(laic.get('s').foo, 'bar');
+  delete require.cache[laicPath];
+});
+
 it('loads files to namespaces', function loadFiles() {
   const laic = new (require(laicPath))();
   laic.loadFile('test/lib/literal');
