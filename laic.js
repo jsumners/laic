@@ -330,9 +330,12 @@ Laic.prototype.loadFile = function loadFile(file) {
  *
  * @param {(string|Symbol)} name The name for the instance within the namespace.
  * @param {*} instance Any initialized object.
+ * @param {boolean} init Whether or not to try and instantiate a new instance
+ * while registering. Default: <code>true</code>
  * @returns {Namespace} The namespace under which the object was registered.
  */
-Laic.prototype.register = function register(name, instance) {
+Laic.prototype.register = function register(name, instance, init) {
+  const _init = (arguments.length === 3) ? init : true;
   let _name = name;
   let parent = (this._globalNS && isName(_name)) ? this.global : this;
 
@@ -355,8 +358,12 @@ Laic.prototype.register = function register(name, instance) {
     return parent;
   }
 
-  const _instance = instantiate(parent, instance);
-  parent[_name] = _instance;
+  if (_init) {
+    const _instance = instantiate(parent, instance);
+    parent[_name] = _instance;
+  } else {
+    parent[_name] = instance;
+  }
   return parent;
 };
 

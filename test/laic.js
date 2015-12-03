@@ -121,6 +121,18 @@ describe('Laic', function describeLaic() {
     delete require.cache[laicPath];
   });
 
+  it('registers values without instantiation', function registerByPath() {
+    const laic = new (require(laicPath))();
+    laic.register(
+      'answer',
+      function() { return 42; },
+      false
+    );
+    const answer = laic.get('answer');
+    expect(answer()).to.equal(42);
+    delete require.cache[laicPath];
+  });
+
   it('gets values by path', function valByPath() {
     const laic = new (require(laicPath))('parent/child/grandchild');
     laic.parent.child.grandchild.register('foo', 'bar');
