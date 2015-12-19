@@ -299,7 +299,7 @@ Laic.prototype.loadFile = function loadFile(file) {
   }
 
   let ns = this;
-  if (ns._globalNS && !rootDir) {
+  if (!rootDir) {
     ns.addNamespacePath(dir);
     ns = getInnerNS(ns, splitPath(dir));
   }

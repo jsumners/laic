@@ -45,10 +45,20 @@ it('supports singleton annotations', function singletonAnnotations() {
   delete require.cache[laicPath];
 });
 
-it('loads files to namespaces', function loadFiles() {
+it('loads files to namespace off root namespace', function loadFiles() {
   const laic = new (require(laicPath))();
   laic.loadFile('test/lib/literal');
   const lib = laic.test.lib;
+  assert.equal(lib.get('literal').foo, 'bar');
+  assert.isDefined(lib._fsPath, '_fsPath is defined');
+  delete require.cache[laicPath];
+});
+
+it('loads files to namespace off sub-namespace', function loadFilesSub() {
+  const laic = new (require(laicPath))();
+  const sub = laic.addNamespace('sub');
+  sub.loadFile('test/lib/literal');
+  const lib = laic.sub.test.lib;
   assert.equal(lib.get('literal').foo, 'bar');
   assert.isDefined(lib._fsPath, '_fsPath is defined');
   delete require.cache[laicPath];
