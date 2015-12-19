@@ -300,7 +300,9 @@ Laic.prototype.loadFile = function loadFile(file) {
 
   let ns = this;
   if (!rootDir) {
-    ns.addNamespacePath(dir);
+    // if they passed 'foo/file' then dir would be 'foo' so we need a trailing
+    // slash
+    ns.addNamespacePath((dir.indexOf('/') === -1) ? `${dir}/` : dir);
     ns = getInnerNS(ns, splitPath(dir));
   }
 
