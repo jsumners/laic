@@ -375,9 +375,9 @@ function getFsPath(namespace, nsPath) {
 
   if (basePath.indexOf(`node_modules/${MODULE_NAME}`) !== -1) {
     while (!fs.statSync(basePath + '/node_modules').isDirectory() ||
-      basePath.substr(MODULE_NAME.length) === MODULE_NAME)
+      basePath.substr(-1 * MODULE_NAME.length) === MODULE_NAME)
     {
-      basePath = path.resolve(basePath + '/..');
+      basePath = path.resolve(basePath + '/../..');
     }
   } else {
     while (!fs.statSync(basePath + '/node_modules').isDirectory()) {
